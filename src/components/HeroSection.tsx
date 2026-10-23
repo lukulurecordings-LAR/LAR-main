@@ -3,9 +3,9 @@ import { ArrowDownIcon, ArrowUpRightIcon, Disc3Icon } from 'lucide-react';
 import { Link } from 'react-router';
 
 const stats = [
-  { value: '14+', label: 'Courses' },
-  { value: '500+', label: 'Students' },
-  { value: '20+', label: 'Releases' },
+  { value: '11', label: 'Programmes' },
+  { value: 'Online', label: 'Learning' },
+  { value: 'ZA', label: 'Based' },
 ];
 
 export function HeroSection() {
@@ -30,7 +30,6 @@ export function HeroSection() {
           <h1 id="hero-title">
             <span>Build your sound.</span>
             <span className="hero-title-accent">Launch your career.</span>
-            <span>Release with purpose.</span>
           </h1>
           <p className="hero-lede">
             Learn production, music business, and release strategy through practical projects, feedback, and a South African music ecosystem behind you.
@@ -39,8 +38,8 @@ export function HeroSection() {
             <a href="#courses" className="button button-primary">
               Start learning <ArrowDownIcon aria-hidden="true" />
             </a>
-            <Link to="#about" className="button button-quiet">
-              Explore the ecosystem <ArrowUpRightIcon aria-hidden="true" />
+            <Link to="/#apply" className="button button-quiet">
+              How to apply <ArrowUpRightIcon aria-hidden="true" />
             </Link>
           </div>
         </motion.div>

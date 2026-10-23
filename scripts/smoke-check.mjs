@@ -20,7 +20,7 @@ if (!robots.includes('Disallow: /student/') || !robots.includes('sitemap.xml')) 
   throw new Error('robots.txt is missing private-route or sitemap rules');
 }
 const sitemap = readFileSync('dist/sitemap.xml', 'utf8');
-for (const path of ['/', '/news', '/enquire']) {
+for (const path of ['/', '/enquire']) {
   if (!sitemap.includes(`https://lar-main-self.vercel.app${path}`)) throw new Error(`Sitemap is missing ${path}`);
 }
 const homeSource = readFileSync('src/pages/HomePage.tsx', 'utf8');
@@ -36,8 +36,8 @@ for (const removed of ['<AboutSection />', '<RemoteAcademySection />', '<Benefit
 if (!homeSource.includes('<ServiceGateway />') || homeSource.indexOf('<ServiceGateway />') > homeSource.indexOf('<CoursesSection />')) throw new Error('Simple three-path gateway must appear before courses');
 const source = readFileSync('src/components/CoursesSection.tsx', 'utf8');
 const courseCodes = source.match(/code: '[A-Z0-9-]+'/g) ?? [];
-if (courseCodes.length !== 14) throw new Error(`Expected 14 course programmes, found ${courseCodes.length}`);
-for (const code of ['FL-01', 'CB-01', 'R14-CERT', 'MB-04']) {
+if (courseCodes.length !== 11) throw new Error(`Expected 11 course programmes, found ${courseCodes.length}`);
+for (const code of ['FL-01', 'CB-01', 'MB-04']) {
   if (!source.includes(`code: '${code}'`)) throw new Error(`Course library is missing ${code}`);
 }
 console.log('Foundation and course-library smoke checks passed.');

@@ -13,13 +13,13 @@ import {
 import { Link } from 'react-router-dom';
 
 const demoCourses = [
-  { code: 'R14-CERT', title: 'Reason 14 Music Production Certificate', progress: 42, next: 'Week 6: Song arrangement and automation', completed: '5 of 12 weeks' },
-  { code: 'R14-LAB', title: 'Reason Sound Design Lab', progress: 60, next: 'Build a moving pad in Europa', completed: '6 of 10 lessons' },
+  { code: 'FL-01', title: 'FL Studio Foundations', progress: 42, next: 'Week 6: Song arrangement and automation', completed: '5 of 12 weeks' },
+  { code: 'CB-02', title: 'Cubase Production Workflow', progress: 60, next: 'Build an arrangement from your MIDI ideas', completed: '6 of 10 lessons' },
   { code: 'BUS-01', title: 'Music Business Made Simple', progress: 20, next: 'Copyright, splits and credits', completed: '2 of 10 lessons' },
 ] as const;
 
 const demoResources = [
-  { name: 'Reason 14 course template', type: 'Reason project', icon: FileMusicIcon },
+  { name: 'Production planning worksheet', type: 'PDF worksheet', icon: FileMusicIcon },
   { name: '12-week production checklist', type: 'PDF guide', icon: BookOpenIcon },
   { name: 'Release package workbook', type: 'Workbook', icon: DownloadIcon },
 ] as const;
@@ -56,7 +56,7 @@ export function DemoStudentPortal() {
           <section className="demo-panel" aria-labelledby="demo-courses-heading">
             <div className="demo-panel__head">
               <div><p className="console-label">MY LEARNING</p><h2 id="demo-courses-heading">Course progress</h2></div>
-              <Link to="/#reason-certificate">View full syllabus <ArrowRightIcon aria-hidden="true" /></Link>
+              <Link to="/#courses">View full syllabus <ArrowRightIcon aria-hidden="true" /></Link>
             </div>
             <div className="demo-course-list">
               {demoCourses.map((course) => (

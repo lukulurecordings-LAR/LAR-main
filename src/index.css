@@ -1426,3 +1426,18 @@ body { background: radial-gradient(circle at 82% 8%, var(--glow-orange), transpa
 .ecosystem-list li:hover svg { color: var(--gold); }
 @media (max-width: 760px) { .hero { min-height: auto; padding-top: calc(var(--nav-height) + 3.5rem); } .hero-grid, .ecosystem-layout, .licence-console { grid-template-columns: 1fr; } .hero h1 { font-size: clamp(3.25rem, 16vw, 5.8rem); } .hero-console { margin-top: 1rem; } .hero-actions { align-items: stretch; flex-direction: column; } .hero-actions .button { width: 100%; } .ecosystem-list li { grid-template-columns: 2rem 2.2rem 1fr; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; } }
+/* Academy refinement: balanced type and a clear enrolment path. */
+.hero-grid { grid-template-columns: minmax(0, 1.5fr) minmax(17rem, .75fr); gap: clamp(2rem, 5vw, 5rem); }
+.hero h1 { font-size: clamp(3rem, 5.6vw, 5.8rem); line-height: 1.02; letter-spacing: -.035em; text-wrap: balance; }
+.hero-lede { max-width: 38rem; margin-top: 1.5rem; }
+.hero-console { width: 100%; max-width: 25rem; justify-self: end; }
+.application-steps { list-style: none; padding: 0; margin: 2rem 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2rem; }
+.application-steps li { border-top: 1px solid var(--border); padding-top: 1.5rem; }
+.application-steps li > span { color: var(--orange); font-weight: 700; }
+.application-steps h3 { font-size: 1.5rem; margin: 1rem 0 .6rem; }
+.application-steps p, .application-note { color: var(--muted); line-height: 1.7; }
+.application-note { margin-top: 1rem; font-size: .85rem; }
+.nav-inner { gap: 1.5rem; }
+.desktop-nav { gap: clamp(.85rem, 1.5vw, 1.75rem); }
+@media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } .hero-console { justify-self: start; } .application-steps { grid-template-columns: 1fr; gap: 1rem; } }
+@media (max-width: 480px) { .hero h1 { font-size: clamp(2.5rem, 11vw, 3.5rem); } .hero-actions > .button { width: 100%; justify-content: center; } }
