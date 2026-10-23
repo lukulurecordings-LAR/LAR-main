@@ -7,7 +7,6 @@ import {
   UsersIcon,
   ZapIcon,
 } from 'lucide-react';
-import { CheckoutButton } from './CheckoutButton';
 import { Reveal } from './Reveal';
 import { SectionIntro } from './SectionIntro';
 import { Link } from 'react-router-dom';
@@ -26,7 +25,7 @@ const plans = [
     name: 'Basic',
     price: 'R149',
     note: 'For beginners starting out',
-    features: ['All beginner courses', 'Free software & VSTs included', 'Download learning materials', 'Community support'],
+    features: ['All beginner courses', 'Guidance on free production tools', 'Download learning materials', 'Community support'],
     icon: StarIcon,
   },
   {
@@ -34,7 +33,7 @@ const plans = [
     name: 'Pro',
     price: 'R349',
     note: 'For serious musicians',
-    features: ['All courses at every level', 'Free software & VSTs included', 'Mastering at R100 per song', 'Live classes', 'Feedback on your music', 'Demo submissions to the label'],
+    features: ['All courses at every level', 'Guidance on free production tools', 'Mastering at R100 per song', 'Live classes', 'Feedback on your music', 'Release preparation guidance'],
     icon: ZapIcon,
     featured: true,
   },
@@ -43,7 +42,7 @@ const plans = [
     name: 'VIP',
     price: 'R999',
     note: 'The full experience',
-    features: ['Everything in Pro', 'Free software & VSTs included', 'Free mastering included', 'Studio session discount', 'Direct mentorship', 'Lukulu Recordings release opportunity'],
+    features: ['Everything in Pro', 'Guidance on free production tools', 'Mastering support; scope confirmed on application', 'Studio session discount', 'Direct mentorship', 'Personal development plan'],
     icon: CrownIcon,
   },
 ];
@@ -88,13 +87,9 @@ export function PricingSection() {
                       View free lessons <ArrowRightIcon aria-hidden="true" />
                     </a>
                   ) : (
-                    <CheckoutButton
-                      itemId={plan.id}
-                      className={plan.featured ? 'button button-primary' : 'button button-quiet'}
-                      ariaLabel={`Choose the ${plan.name} plan and continue to secure checkout`}
-                    >
-                      Choose {plan.name} <ArrowRightIcon aria-hidden="true" />
-                    </CheckoutButton>
+                    <Link to={`/enquire?category=academy&service=${plan.name.toLowerCase()}`} className={plan.featured ? 'button button-primary' : 'button button-quiet'}>
+                      Apply for {plan.name} <ArrowRightIcon aria-hidden="true" />
+                    </Link>
                   )}
                 </div>
               </article>
@@ -103,7 +98,7 @@ export function PricingSection() {
         </Reveal>
 
         <div className="pricing-footnotes">
-          <p><ShieldCheckIcon aria-hidden="true" /> Paid plans continue to Stripe’s secure hosted checkout. Lukulu confirms access by email.</p>
+          <p><ShieldCheckIcon aria-hidden="true" /> Apply first. We confirm the plan, fees and availability before payment.</p>
           <Link to="/enquire?category=accounts&service=subscription-help">
             <UsersIcon aria-hidden="true" /> Membership, invoice or referral help
           </Link>

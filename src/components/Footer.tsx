@@ -18,7 +18,7 @@ export function Footer() {
             <h2>Explore</h2>
             <Link to="/#courses">Academy courses</Link>
             <Link to="/#services">All services</Link>
-            <Link to="/news">Label news</Link>
+            <Link to="/#apply">How to apply</Link>
             <Link to="/student/login">Student login</Link>
           </div>
           <div>

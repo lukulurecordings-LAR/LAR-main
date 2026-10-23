@@ -4,9 +4,10 @@ import { LogInIcon, MenuIcon, XIcon } from 'lucide-react';
 import { Link, useLocation } from 'react-router';
 
 const NAV_LINKS = [
-  { label: 'Remote Courses', to: '/#remote-courses', section: 'learn' },
+  { label: 'Courses', to: '/#courses', section: 'learn' },
   { label: 'Services', to: '/#services', section: 'services' },
-  { label: 'Label News', to: '/news', section: 'news' },
+  { label: 'Pricing', to: '/#pricing', section: 'pricing' },
+  { label: 'How to apply', to: '/#apply', section: 'apply' },
   { label: 'Enquire', to: '/enquire', section: 'enquire' },
   { label: 'Student portal', to: '/student/login', section: 'student', icon: LogInIcon },
 ];
@@ -16,7 +17,8 @@ const OBSERVED_SECTIONS: Record<string, string> = {
   about: 'home',
   courses: 'learn',
   'remote-courses': 'learn',
-  pricing: 'learn',
+  pricing: 'pricing',
+  apply: 'apply',
   benefits: 'learn',
   journey: 'learn',
   services: 'services',

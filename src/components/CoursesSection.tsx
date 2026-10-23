@@ -7,14 +7,13 @@ import {
   HeadphonesIcon,
   Music2Icon,
   SearchIcon,
-  SlidersHorizontalIcon,
   XIcon,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Reveal } from './Reveal';
 import { SectionIntro } from './SectionIntro';
 
-type Category = 'all' | 'flstudio' | 'cubase' | 'reason' | 'business';
+type Category = 'all' | 'flstudio' | 'cubase' | 'business';
 type Course = {
   code: string;
   category: Exclude<Category, 'all'>;
@@ -32,7 +31,6 @@ const categories = [
   { id: 'all', label: 'All programmes', icon: Music2Icon },
   { id: 'flstudio', label: 'FL Studio', icon: Music2Icon },
   { id: 'cubase', label: 'Cubase', icon: HeadphonesIcon },
-  { id: 'reason', label: 'Reason', icon: SlidersHorizontalIcon },
   { id: 'business', label: 'Music Business', icon: BriefcaseBusinessIcon },
 ] satisfies Array<{ id: Category; label: string; icon: typeof Music2Icon }>;
 
@@ -44,9 +42,6 @@ const courses: Course[] = [
   { code: 'CB-01', category: 'cubase', track: 'Cubase', title: 'Cubase Foundations', level: 'Beginner', duration: '5 weeks', description: 'Set up Cubase, record audio and MIDI, and complete a simple production.', outcome: 'Finish one recorded and arranged Cubase project.', topics: ['Audio and device setup', 'MIDI and instrument tracks', 'Audio recording and editing', 'Arrangement and export'] },
   { code: 'CB-02', category: 'cubase', track: 'Cubase', title: 'Music Production Workflow', level: 'Intermediate', duration: '6 weeks', description: 'Develop ideas faster with practical writing, recording and editing systems.', outcome: 'Turn a short idea into a complete production.', topics: ['Project templates', 'Chord and melody tools', 'Comping and audio editing', 'Automation and arrangement'] },
   { code: 'CB-03', category: 'cubase', track: 'Cubase', title: 'Mix Workflow', level: 'Advanced', duration: '6 weeks', description: 'Build a professional Cubase mix from session preparation to final delivery.', outcome: 'Complete one translated mix and export clean stems.', topics: ['Session cleanup and balance', 'Channel Strip processing', 'Groups, effects and depth', 'Mix review and final export'] },
-  { code: 'R14-CERT', category: 'reason', track: 'Reason', title: 'Reason 14 Music Production Certificate', level: 'Beginner–Intermediate', duration: '12 weeks', description: 'Create, record, mix, master and prepare one original track for release.', outcome: 'Leave with a release-ready track, stems, credits and release plan.', topics: ['Drums, chords and melody', 'Sound design and sampling', 'Arrangement and recording', 'Mixing, mastering and release'], featured: true },
-  { code: 'RS-02', category: 'reason', track: 'Reason', title: 'Sound Design Lab', level: 'Intermediate', duration: '6 weeks', description: 'Build useful original sounds with Reason instruments and Combinators.', outcome: 'Create a personal bank of playable production patches.', topics: ['Europa, Thor and Subtractor', 'Bass, pad, pluck and lead design', 'Modulation and movement', 'Combinators and patch organisation'] },
-  { code: 'RS-03', category: 'reason', track: 'Reason', title: 'Mixing & Routing Lab', level: 'Intermediate–Advanced', duration: '6 weeks', description: 'Use Reason’s rack and mixer to build flexible, controlled mix systems.', outcome: 'Finish a polished mix with reusable routing templates.', topics: ['Gain staging and mixer workflow', 'Busses and parallel channels', 'Sidechain and dynamic control', 'Effects, checks and delivery'] },
   { code: 'MB-01', category: 'business', track: 'Music Business', title: 'Music Business Essentials', level: 'All levels', duration: '4 weeks', description: 'Understand how songs, recordings, releases and music income connect.', outcome: 'Map your own practical route from music project to release.', topics: ['Industry roles and income', 'Songs versus recordings', 'Credits and agreements', 'Release workflow'] },
   { code: 'MB-02', category: 'business', track: 'Music Business', title: 'Copyright & Beat Licensing', level: 'All levels', duration: '3 weeks', description: 'Learn ownership basics and use clearer agreements for beats and collaborations.', outcome: 'Prepare a split sheet and a simple beat-licensing checklist.', topics: ['Copyright basics', 'Song splits and producer rights', 'Lease and exclusive licences', 'Records and agreement checks'] },
   { code: 'MB-03', category: 'business', track: 'Music Business', title: 'Royalties & Metadata', level: 'All levels', duration: '3 weeks', description: 'Organise the information and registrations needed to collect music income.', outcome: 'Build accurate credits, metadata and a royalty-registration plan.', topics: ['Royalty types', 'ISRCs and release metadata', 'Collection organisations', 'Statements and record keeping'] },
@@ -77,7 +72,7 @@ export function CoursesSection() {
               return <button key={id} type="button" className={activeCategory === id ? 'is-active' : ''} aria-pressed={activeCategory === id} onClick={() => setActiveCategory(id)}><Icon aria-hidden="true" /><span>{label}</span><small>{count}</small></button>;
             })}
           </div>
-          <label className="course-search"><span>Search the course library</span><div><SearchIcon aria-hidden="true" /><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Try “mixing”, “beginner” or “Reason”" />{query && <button type="button" onClick={() => setQuery('')} aria-label="Clear course search"><XIcon aria-hidden="true" /></button>}</div></label>
+          <label className="course-search"><span>Search the course library</span><div><SearchIcon aria-hidden="true" /><input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Try “mixing”, “beginner” or “Cubase”" />{query && <button type="button" onClick={() => setQuery('')} aria-label="Clear course search"><XIcon aria-hidden="true" /></button>}</div></label>
         </Reveal>
 
         <div className="course-library__status" role="status" aria-live="polite"><strong>{filteredCourses.length}</strong> {filteredCourses.length === 1 ? 'programme' : 'programmes'} found</div>

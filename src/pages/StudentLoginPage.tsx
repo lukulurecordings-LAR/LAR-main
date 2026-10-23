@@ -32,10 +32,12 @@ export function StudentLoginPage() {
     setState('pending');
     setMessage('');
 
+    try {
     const { error } = await supabase.auth.signInWithOtp({
       email: email.trim(),
       options: {
         emailRedirectTo: getStudentRedirectUrl(),
+        shouldCreateUser: false,
       },
     });
 
@@ -50,7 +52,11 @@ export function StudentLoginPage() {
     }
 
     setState('sent');
-    setMessage('Check your email for a secure one-time sign-in link. It may take a few minutes to arrive.');
+    setMessage('If this email belongs to an enrolled student, a secure sign-in link will arrive shortly.');
+    } catch {
+      setState('error');
+      setMessage('We could not reach the sign-in service. Check your connection and try again.');
+    }
   };
 
   return (
