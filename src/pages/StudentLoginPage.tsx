@@ -6,7 +6,6 @@ import {
   GraduationCapIcon,
   LoaderCircleIcon,
   LockKeyholeIcon,
-  EyeIcon,
   MailIcon,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -32,10 +31,12 @@ export function StudentLoginPage() {
     setState('pending');
     setMessage('');
 
+    try {
     const { error } = await supabase.auth.signInWithOtp({
       email: email.trim(),
       options: {
         emailRedirectTo: getStudentRedirectUrl(),
+        shouldCreateUser: false,
       },
     });
 
@@ -50,7 +51,8 @@ export function StudentLoginPage() {
     }
 
     setState('sent');
-    setMessage('Check your email for a secure one-time sign-in link. It may take a few minutes to arrive.');
+    setMessage('If your student account is active, check your email for a secure sign-in link.');
+    } catch { setState('error');setMessage('The sign-in service could not be reached. Please try again.'); }
   };
 
   return (
@@ -97,11 +99,6 @@ export function StudentLoginPage() {
                 </div>
               </form>
             )}
-
-            <div className="demo-login-entry">
-              <div><EyeIcon aria-hidden="true" /><span><strong>Preview before enrolling</strong><small>Explore the full student portal with safe sample data.</small></span></div>
-              <Link className="button button-quiet button-full" to="/student/demo">Enter demo portal <ArrowRightIcon aria-hidden="true" /></Link>
-            </div>
 
             <div className="auth-console__foot">
               <p><LockKeyholeIcon aria-hidden="true" /> Student access is verified after sign-in.</p>

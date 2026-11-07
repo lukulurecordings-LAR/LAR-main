@@ -5,6 +5,10 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
+      "source": "/student-lab/:asset*",
+      "destination": "/api/lab?asset=:asset*"
+    },
+    {
       "source": "/news",
       "destination": "/index.html"
     },
@@ -39,5 +43,10 @@
         }
       ]
     }
-  ]
+  ],
+  "functions": {
+    "api/lab.ts": {
+      "includeFiles": "api/_lab-assets/**"
+    }
+  }
 }

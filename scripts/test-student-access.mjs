@@ -1,0 +1,22 @@
+import ts from 'typescript';
+import { mkdtempSync, readFileSync, writeFileSync, mkdirSync, rmSync } from 'node:fs';
+import { join } from 'node:path';
+import { tmpdir } from 'node:os';
+import assert from 'node:assert/strict';
+const dir=mkdtempSync(join(tmpdir(),'academy-auth-'));mkdirSync(join(dir,'_lib'));mkdirSync(join(dir,'_lab-assets'));writeFileSync(join(dir,'package.json'),'{"type":"module"}');writeFileSync(join(dir,'_lab-assets/index.html'),'protected lab');
+for(const file of ['student','lab','_lib/http','_lib/environment','_lib/catalog','_lib/supabase','_lib/student-access'])writeFileSync(join(dir,file+'.js'),ts.transpileModule(readFileSync('api/'+file+'.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.ES2022,target:ts.ScriptTarget.ES2022}}).outputText);
+process.env.SUPABASE_URL='https://test.invalid';process.env.SUPABASE_SERVICE_ROLE_KEY='test-only';
+let access=true, stored=false, future=true;
+globalThis.fetch=async url=>{let data=[];if(url.includes('/auth/v1/user'))data={id:'12345678-1234-1234-1234-123456789abc',email:'test@example.com'};else if(url.includes('/entitlements'))data=access?[{access_starts_at:future?null:'2999-01-01',access_ends_at:null}]:[];else if(url.includes('/student_lab_sessions'))data=stored?[{user_id:'12345678-1234-1234-1234-123456789abc'}]:[];return {ok:true,status:200,text:async()=>JSON.stringify(data),json:async()=>data};};
+function response(){return {statusCode:0,headers:{},setHeader(k,v){this.headers[k]=v;},end(v){this.body=v;}};}
+const student=(await import(join(dir,'student.js'))).default,lab=(await import(join(dir,'lab.js'))).default;
+let res=response();await student({method:'POST',headers:{}},res);assert.equal(res.statusCode,401);
+access=false;res=response();await student({method:'POST',headers:{authorization:'Bearer test'}},res);assert.equal(res.statusCode,403);
+access=true;future=false;res=response();await student({method:'POST',headers:{authorization:'Bearer test'}},res);assert.equal(res.statusCode,403);
+future=true;res=response();await student({method:'POST',headers:{authorization:'Bearer test'}},res);assert.equal(res.statusCode,200);assert.match(res.headers['Set-Cookie'],/HttpOnly; Secure; SameSite=Strict/);
+res=response();await lab({method:'GET',headers:{},url:'/'},res);assert.equal(res.statusCode,401);
+const headers={cookie:res.headers['Set-Cookie']};headers.cookie='__Host-lukulu_lab='+'a'.repeat(64);res=response();await lab({method:'GET',headers,url:'/'},res);assert.equal(res.statusCode,403);
+stored=true;res=response();await lab({method:'GET',headers,url:'/?asset=../../secret'},res);assert.equal(res.statusCode,404);
+res=response();await lab({method:'GET',headers,url:'/?asset=index.html'},res);assert.equal(res.body.toString(),'protected lab');
+access=false;res=response();await lab({method:'GET',headers,url:'/?asset=index.html'},res);assert.equal(res.statusCode,403);
+rmSync(dir,{recursive:true,force:true});console.log('Passed: login required, active dated entitlement, HttpOnly session, asset protection, traversal rejection, access revocation.');

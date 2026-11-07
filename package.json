@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit && tsc -p tsconfig.api.json",
     "check": "npm run lint && npm run typecheck && npm run build && npm run smoke",
     "preview": "npx vite preview",
-    "smoke": "node scripts/smoke-check.mjs"
+    "smoke": "node scripts/smoke-check.mjs",
+    "test:student": "node scripts/test-student-access.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
