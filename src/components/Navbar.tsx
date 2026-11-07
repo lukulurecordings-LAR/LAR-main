@@ -4,9 +4,8 @@ import { LogInIcon, MenuIcon, XIcon } from 'lucide-react';
 import { Link, useLocation } from 'react-router';
 
 const NAV_LINKS = [
-  { label: 'Remote Courses', to: '/#remote-courses', section: 'learn' },
+  { label: 'Courses', to: '/#courses', section: 'learn' },
   { label: 'Services', to: '/#services', section: 'services' },
-  { label: 'Label News', to: '/news', section: 'news' },
   { label: 'Enquire', to: '/enquire', section: 'enquire' },
   { label: 'Student portal', to: '/student/login', section: 'student', icon: LogInIcon },
 ];
